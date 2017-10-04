@@ -20,6 +20,7 @@
     "@types/node": "^8.0.32",
     "express": "^4.16.1",
     "knex": "^0.13.0",
+    "knex-tenanty": "0.0.1-beta",
     "lru-cache": "^4.1.1",
     "mssql": "^3.3.0",
     "mysql": "^2.14.1",
