@@ -1,7 +1,7 @@
 {
   "name": "knex-mt",
   "version": "1.0.0",
-  "description": "",
+  "description": "Example multi-tenant app with knex and schema",
   "main": "src/index.ts",
   "scripts": {
     "start": "ts-node src/index.ts",
