@@ -1,18 +1,28 @@
 import * as Knex from "knex";
 
-import knexSettings from '../../../knexfile';
+function getSchema(knex: Knex) {
+  const client = knex.client.config.schema;
 
-const settings = knexSettings[process.env.NODE_ENV];
+  return {
+    client,
+    schema: client ? knex.schema.withSchema(client) : knex.schema,
+  };
+}
 
 export async function up(knex: Knex): Promise<any> {
-  await Knex(settings).raw('create schema cli_1');
-  await Knex(settings).schema.withSchema('cli_1').createTable('test', (table) => {
+  const { client, schema } = getSchema(knex);
+
+  await knex.raw(`create schema ${client}`);
+
+  await schema.createTable('test', (table) => {
     table.increments('id').primary();
     table.string('name', 256);
   });
 };
 
 export async function down(knex: Knex): Promise<any> {
-  await Knex(settings).schema.withSchema('cli_1').dropTable('test');
-  await Knex(settings).raw('drop schema cli_1');
+  const { client, schema } = getSchema(knex);
+
+  await schema.dropTable('test');
+  await knex.raw(`drop schema ${client}`);
 };

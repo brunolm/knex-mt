@@ -34,7 +34,7 @@ export const mysql = {
 
 export const mssql = {
   client: 'mssql',
-  debug: true,
+  debug: false,
   connection: {
     database: 'model',
     host: process.env.MSSQL_PORT_1433_TCP_ADDR,
