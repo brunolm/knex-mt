@@ -37,7 +37,6 @@ mssql:
   environment:
     SA_PASSWORD: 'Str0nk@p@assword!'
     ACCEPT_EULA: 'Y'
-    CHECK_POLICY: 'off'
 
 proxy:
   image: dockito/proxy:latest
