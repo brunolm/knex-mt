@@ -1,0 +1,6 @@
+.DS_Store
+node_modules/
+ts-node*/
+dist/
+npm-debug.log*
+.v8flags*

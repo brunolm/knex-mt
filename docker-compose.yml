@@ -1,0 +1,47 @@
+local:
+  image: node:8.5.0
+  working_dir: /usr/src/app
+  command: npm start
+  environment:
+    NODE_ENV: mssql
+    VIRTUAL_HOST: db.dockerwin.codingwise.com
+  ports:
+    - 3000
+  volumes:
+    - ./:/usr/src/app
+  links:
+    - postgres
+    - mysql
+    - mssql
+
+postgres:
+  image: postgres:9.6.1
+  ports:
+    - 5432:5432
+  environment:
+    POSTGRES_USER: master
+    POSTGRES_PASSWORD: master
+    POSTGRES_DB: databasename
+
+mysql:
+  image: mysql:5.7
+  ports:
+    - 3306:3306
+  environment:
+    MYSQL_ROOT_PASSWORD: root
+
+mssql:
+  image: microsoft/mssql-server-linux:2017-latest
+  ports:
+    - 1433:1433
+  environment:
+    SA_PASSWORD: 'Str0nk@p@assword!'
+    ACCEPT_EULA: 'Y'
+    CHECK_POLICY: 'off'
+
+proxy:
+  image: dockito/proxy:latest
+  ports:
+    - '80:80'
+  volumes:
+    - /var/run/docker.sock:/tmp/docker.sock
